@@ -1,8 +1,8 @@
 from telegram import Update
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
+from telegram.ext import Updater, CommandHandler, MessageHandler, filters, CallbackContext
 
 # Substitua com o token gerado pelo @BotFather no Telegram
-TELEGRAM_TOKEN = "8038213374:AAFocrOmpN5m38JDf37Pg9d3fwe9PZaPCHE"
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
 
 # Comando /start
 def start(update: Update, context: CallbackContext):
