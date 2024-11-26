@@ -1,4 +1,5 @@
 from telegram import Update
+import os
 from telegram.ext import Updater, CommandHandler, MessageHandler, filters, CallbackContext
 
 # Substitua com o token gerado pelo @BotFather no Telegram
