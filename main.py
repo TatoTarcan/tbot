@@ -22,7 +22,7 @@ def main():
     dispatcher.add_handler(CommandHandler("start", start))
 
     # Respondendo mensagens de texto
-    dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, echo))
+    dispatcher.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, echo))
 
     # Iniciando o bot
     updater.start_polling()
