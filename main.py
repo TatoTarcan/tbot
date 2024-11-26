@@ -1,33 +1,22 @@
-from telegram import Update
 import os
-from telegram.ext import Updater, CommandHandler, MessageHandler, filters, CallbackContext
+from telegram.ext import ApplicationBuilder, CommandHandler
 
-# Substitua com o token gerado pelo @BotFather no Telegram
-TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
-
-# Comando /start
-def start(update: Update, context: CallbackContext):
-    update.message.reply_text("Olá! Eu sou seu bot no Telegram. Como posso ajudar?")
-
-# Mensagem de eco
-def echo(update: Update, context: CallbackContext):
-    user_message = update.message.text
-    update.message.reply_text(f"Você disse: {user_message}")
+# Função de comando simples
+async def start(update, context):
+    await update.message.reply_text("Olá! Eu sou seu bot. Como posso ajudar?")
 
 # Função principal
 def main():
-    updater = Updater(TELEGRAM_TOKEN)
-    dispatcher = updater.dispatcher
+    TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
 
-    # Configurando o comando /start
-    dispatcher.add_handler(CommandHandler("start", start))
+    # Construir aplicação
+    application = ApplicationBuilder().token(TELEGRAM_TOKEN).build()
 
-    # Respondendo mensagens de texto
-    dispatcher.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, echo))
+    # Adicionar comando /start
+    application.add_handler(CommandHandler("start", start))
 
-    # Iniciando o bot
-    updater.start_polling()
-    updater.idle()
+    # Rodar o bot
+    application.run_polling()
 
 if __name__ == "__main__":
     main()
